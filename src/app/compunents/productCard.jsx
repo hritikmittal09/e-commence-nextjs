@@ -6,7 +6,7 @@ function CardWithImage({ imageUrl, title, description }) {
   return (
     
     <Link href={url} >
-    <Box maxW="lg" borderWidth="1px" borderRadius="lg" overflow="hidden">
+    <Box maxW="lg" borderWidth="0px" borderRadius="lg" overflow="hidden" className="shadow-md p-3">
       <Box h="250px" overflow="hidden">
         <Image src={imageUrl} alt={title} h="100%" w="100%" objectFit="cover" />
       </Box>
