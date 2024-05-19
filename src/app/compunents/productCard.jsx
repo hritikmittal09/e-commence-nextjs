@@ -1,9 +1,11 @@
 import { Box, Image, Text } from "@chakra-ui/react";
 import Link from "next/link";
 
-function CardWithImage({ imageUrl, title, description }) {
-  const url = `../productDetails/${title}`
+function CardWithImage({ imageUrl, title, productId,description  }) {
+  const url = `../productDetails/${productId}`
+  
   return (
+  
     
     <Link href={url} >
     <Box maxW="lg" borderWidth="0px" borderRadius="lg" overflow="hidden" className="shadow-md p-3">
@@ -24,7 +26,7 @@ function CardWithImage({ imageUrl, title, description }) {
 
         <Box>
           <Text color="gray.500" fontSize="sm">
-            {description}
+            <b> ₹{description}</b>
           </Text>
         </Box>
       </Box>

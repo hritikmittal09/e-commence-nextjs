@@ -1,17 +1,17 @@
-import Products from "@/app/api/products"
+
 import Image from "next/image";
+import product from "@/app/api/models/prodcts";
 import { Box, Flex, Text, Button, Select } from "@chakra-ui/react";
 
- const ProductDetails = ({params}) => {
- const product =  Products.filter((product)=>{
-    return params.title === product.title
-  })
-  const {imageUrl,title,dis} = product[0]
+ const ProductDetails = async ({params}) => {
+  const item = await product.findById(params.title)
+  const {image,title,dis ,price}= item
+ 
   return (
     <Box as="section" bg="gray.100" color="gray.600" overflow="hidden" p={24}>
       <Box maxW="container.xl" mx="auto">
         <Flex>
-          <img src= {imageUrl} className=" h-64" alt="" />
+          <img src= {image} className=" h-64" alt="" />
           <Box w={{ base: "full", lg: "1/2" }} pl={{ base: 0, lg: 10 }} py={{ base: 6, lg: 0 }} mt={{ base: 6, lg: 0 }}>
             <Text textTransform="uppercase" fontSize="sm" fontWeight="semibold" color="gray.500" mb={1}>Brand Name</Text>
             <Text fontSize="3xl" fontWeight="medium" color="gray.900" mb={1}>{title}</Text>
@@ -23,7 +23,7 @@ import { Box, Flex, Text, Button, Select } from "@chakra-ui/react";
               ))}
               <Text ml={3} color="gray.600">4 Reviews</Text>
             </Flex>
-            <Text mb={6} lineHeight="relaxed">Fam locavore kickstarter distillery. Mixtape chillwave tumeric sriracha taximy chia microdosing tilde DIY. XOXO fam indxgo juiceramps cornhole raw denim forage brooklyn. Everyday carry +1 seitan poutine tumeric. Gastropub blue bottle austin listicle pour-over, neutra jean shorts keytar banjo tattooed umami cardigan.</Text>
+            <Text mb={6} lineHeight="relaxed">{dis}</Text>
             <Flex alignItems="center" pb={5} borderBottomWidth={2} borderColor="gray.100" mb={5}>
               <Flex>
                 <Text mr={3}>Color</Text>
@@ -47,7 +47,7 @@ import { Box, Flex, Text, Button, Select } from "@chakra-ui/react";
               </Flex>
             </Flex>
             <Flex>
-              <Text fontSize="2xl" fontWeight="medium" color="gray.900" mr="auto">$58.00</Text>
+              <Text fontSize="2xl" fontWeight="medium" color="gray.900" mr="auto">Rs. {price}</Text>
               <button className=" bg-red-700 text-white font-bold p-5 px-10  rounded-md">Buy</button>
               <Button rounded="full" w={10} h={10} bg="gray.200" p={0} borderWidth={0} ml={4}>
                 <svg fill="currentColor" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-5 h-5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
