@@ -2,14 +2,17 @@
 import { Box, Flex, Spacer, Heading, Button } from "@chakra-ui/react";
 import Link from "next/link";
 import { LuShoppingCart } from "react-icons/lu"
-import SinupModal from "./SingnUp-modal";
+
+
 import { useState } from "react";
 
 
 
 
 function BlackNavbar() {
+const [heading,setheading] = useState("")
   const [openModal,setOpenmodal] = useState(false)
+   
   return (
     <Box bg="black" py={2}>
       <Flex alignItems="center" maxW="6xl" mx="auto">
@@ -20,10 +23,13 @@ function BlackNavbar() {
         <Spacer />
         <Spacer/>
         <Link href= ""></Link>
-        <Button className=" bg-yellow-500 text-white"  variant= 'outline' onClick={()=>{setOpenmodal(true)}} >
-          Sign In
+        <Button className=" bg-yellow-500 text-white"  variant= 'outline' onClick={()=>{setOpenmodal(true)}}  >
+          <Link href= '/auth/signup'>Sign in</Link>
       </Button>
-      {openModal && <SinupModal onclose = {()=>{setOpenmodal(false)}}/>}
+      <Button className=" bg-yellow-500 text-white ml-10"  variant= 'outline' onClick={()=>{setOpenmodal(true)}} >
+      <Link href= '/auth/login'>Log in</Link>
+      </Button>
+    
         <Spacer/>
        <button className=" bg-black  rounded-full"> <LuShoppingCart  className="  text-4xl text-white cursor-pointer "/></button>
         

@@ -8,7 +8,7 @@ import { Box, Flex, Text, Button, Select } from "@chakra-ui/react";
   const {image,title,dis ,price}= item
  
   return (
-    <Box as="section" bg="gray.100" color="gray.600" overflow="hidden" p={24}>
+    <Box as="section" bg="gray.100" color="gray.600" overflow="hidden" p={24}  className= ' mb-60'>
       <Box maxW="container.xl" mx="auto">
         <Flex>
           <img src= {image} className=" h-64" alt="" />
@@ -33,7 +33,7 @@ import { Box, Flex, Text, Button, Select } from "@chakra-ui/react";
               </Flex>
               <Flex ml={6} alignItems="center">
                 <Text mr={3}>Size</Text>
-                <Select variant="filled" border="none" bg="transparent" color="gray.600" pl={3} pr={10} focusBorderColor="indigo.500">
+                <Select variant="filled" border="none" bg="transparent" color="gray.600" >
                   <option>SM</option>
                   <option>M</option>
                   <option>L</option>

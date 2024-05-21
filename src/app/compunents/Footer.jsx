@@ -2,7 +2,7 @@ import { Box, Text, Link, Flex } from "@chakra-ui/react";
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white  bottom-0  w-full">
+    <footer className="bg-black text-white  bottom-0  w-full h-100">
       <Box mx="auto" maxW="xl" p={4} py={6} lg="8" bottom={0} left={0} >
         <Flex justifyContent="space-between" alignItems="center">
           <div>
