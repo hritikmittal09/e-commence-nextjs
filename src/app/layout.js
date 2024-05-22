@@ -3,6 +3,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 import BlackNavbar from "./compunents/NavBar";
 import "./globals.css";
 import Footer from "./compunents/Footer";
+import { ToastContainer } from "react-toastify";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,6 +20,7 @@ export default function RootLayout({ children }) {
         <ChakraProvider>
           <BlackNavbar/>
         {children}
+        
         <Footer/>
         </ChakraProvider>
         
