@@ -7,7 +7,7 @@ import ConnectDb from "../../api/db";
 import { redirect } from "next/navigation";
 import FormButton from '@/app/compunents/formButton';
 import { Toast } from '@chakra-ui/react';
-import { signup } from '@/app/serverActions/actions';
+import { login, signup } from '@/app/serverActions/actions';
 
 const ClientSingnUp = async (formdata)=>{
 const res =  await signup(formdata)
@@ -25,7 +25,7 @@ if (res.result== "success") {
     });
     
 }else{
-  toast.error('User already exist', {
+  toast.error(res.result, {
     position: "top-center",
     autoClose: 5000,
     hideProgressBar: false,
@@ -41,6 +41,41 @@ if (res.result== "success") {
 }
 
 
+const ClientLoginUp = async (formdata)=>{
+  const res =  await login(formdata)
+  if (res.result== "success") {
+    toast.success('login  success go to home page now', {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      transition: undefined,
+      });
+      setTimeout(()=>{
+        redirect("/")
+      },50)
+      
+  }else{
+    toast.error(res.result, {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      transition: undefined,
+      });
+  }
+  
+  }
+
+
 
 const  SignupForm =  ({params}) => {
   
@@ -50,7 +85,7 @@ const  SignupForm =  ({params}) => {
         
 
         <h2 className="text-xl font-bold mb-4 text-center">{params.auth== 'login'? 'Log In': "Sign Up"}</h2>
-        <form className="space-y-4" action={ClientSingnUp}>
+        <form className="space-y-4" action={params.auth == 'login'? ClientLoginUp : ClientSingnUp}>
 
           <div>
             <label className="block text-sm font-medium text-gray-700">
