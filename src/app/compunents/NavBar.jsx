@@ -10,8 +10,7 @@ import { useState } from "react";
 
 
 function BlackNavbar() {
-const [heading,setheading] = useState("")
-  const [openModal,setOpenmodal] = useState(false)
+
    
   return (
    <>

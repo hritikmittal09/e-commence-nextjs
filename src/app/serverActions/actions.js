@@ -1,6 +1,8 @@
 "use server";
+import { cookies } from "next/headers";
 import ConnectDb from "../api/db";
 import user from "../api/models/user";
+
 
 export async function signup(formdata) {
   await ConnectDb();
@@ -41,9 +43,12 @@ export async function login(formdata) {
     const existUser = await user.findOne({ email: email });
     const ispassMatch = password == existUser.password
     if (existUser && ispassMatch) {
+      cookies().set("auth", true)
       return {
         result: "success",
       };
+      
+      
     }
   } catch (err) {
     return {
