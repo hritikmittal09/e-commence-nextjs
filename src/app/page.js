@@ -14,6 +14,7 @@ export default async function  Home() {
   const Products =  await product.find()
   
   
+  
    
 
   

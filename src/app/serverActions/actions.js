@@ -1,5 +1,6 @@
 "use server";
 import { cookies } from "next/headers";
+import  Jwt  from "jsonwebtoken";
 import ConnectDb from "../api/db";
 import user from "../api/models/user";
 
@@ -43,7 +44,15 @@ export async function login(formdata) {
     const existUser = await user.findOne({ email: email });
     const ispassMatch = password == existUser.password
     if (existUser && ispassMatch) {
-      cookies().set("auth", true)
+      console.log("userid",existUser._id.toString());
+      const paylod = {
+        userId : existUser._id.toString()
+      }
+      const option = {
+        expiresIn: '1d'
+      }
+      const authtoken =await Jwt.sign(paylod, process.env.SECRET_KEY)
+      cookies().set("auth", authtoken)
       return {
         result: "success",
       };
