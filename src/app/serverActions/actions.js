@@ -3,6 +3,8 @@ import { cookies } from "next/headers";
 import  Jwt  from "jsonwebtoken";
 import ConnectDb from "../api/db";
 import user from "../api/models/user";
+import product from "../api/models/prodcts";
+import { redirect } from "next/navigation";
 
 
 export async function signup(formdata) {
@@ -66,3 +68,20 @@ export async function login(formdata) {
   }
   //redirect('/auth/login')
 }
+
+
+
+ export async function AddProduct(formdata){
+ ConnectDb()
+ 
+  const name = formdata.get('name')
+  const dis = formdata.get('dis')
+  const price = formdata.get('price')
+  const img = formdata.get('img')
+  const newProduct = new product({"dis" : dis, "price" : price, "image" : img, "title" :name})
+  await newProduct.save()
+  console.log("product save sucessfully");
+
+
+
+ }
