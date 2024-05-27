@@ -13,6 +13,7 @@ export async function signup(formdata) {
     const name = formdata.get("name");
     const password = formdata.get("password");
     const email = formdata.get("email");
+    const isAdmin = formdata.get("isAmin")
     const existUser = await user.findOne({ email: email });
     if (existUser) {
       return {
@@ -23,7 +24,9 @@ export async function signup(formdata) {
       name: name,
       email: email,
       password: password,
-    }); // Correct instantiation
+      isAdmin : isAdmin == 'on'? true : false
+    });
+    console.log(isAdmin); // Correct instantiation
     await newperson.save(); // Call the save method
     console.log("Data saved successfully");
     return {
@@ -48,7 +51,8 @@ export async function login(formdata) {
     if (existUser && ispassMatch) {
       console.log("userid",existUser._id.toString());
       const paylod = {
-        userId : existUser._id.toString()
+        userId : existUser._id.toString(),
+        isAdmin : existUser.isAdmin
       }
       const option = {
         expiresIn: '1d'

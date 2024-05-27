@@ -2,12 +2,10 @@
 "use client"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import person from '../../api/models/user';
-import ConnectDb from "../../api/db";
 import { redirect } from "next/navigation";
-import FormButton from '@/app/compunents/formButton';
-import { Toast } from '@chakra-ui/react';
+import { Checkbox, CheckboxGroup } from '@chakra-ui/react'
 import { login, signup } from '@/app/serverActions/actions';
+
 
 const ClientSingnUp = async (formdata)=>{
 const res =  await signup(formdata)
@@ -114,6 +112,8 @@ const  SignupForm =  ({params}) => {
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             />
           </div>
+          {params.auth!="login" && <input name='isAmin' type='checkbox' className=' mx-5'/>}
+          {params.auth != "login" && <label>Signup As Admin</label>}
           <div>
           <button
         type="submit"
