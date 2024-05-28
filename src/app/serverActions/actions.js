@@ -5,6 +5,9 @@ import ConnectDb from "../api/db";
 import user from "../api/models/user";
 import product from "../api/models/prodcts";
 import { redirect } from "next/navigation";
+import { jwtVerify } from 'jose';
+
+const secretKey = new TextEncoder().encode(process.env.SECRET_KEY);
 
 
 export async function signup(formdata) {
@@ -86,6 +89,20 @@ export async function login(formdata) {
   await newProduct.save()
   console.log("product save sucessfully");
 
-
-
- }
+}
+export async function isAdminAuth(){
+const authToken = cookies().get("auth");
+if (authToken) {
+  const { payload } = await jwtVerify(authToken.value, secretKey);
+  
+  if (payload.isAdmin) {
+    return true
+  }
+  return false
+  
+  
+}else{
+  return false
+}
+  return false
+}

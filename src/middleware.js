@@ -4,6 +4,7 @@ import { NextRequest } from "next/server";
 import { redirect } from "next/navigation"
 import  Jwt  from "jsonwebtoken"
 import { jwtVerify } from 'jose';
+import { isAdminAuth } from "./app/serverActions/actions";
 
 const secretKey = new TextEncoder().encode(process.env.SECRET_KEY);
 
@@ -24,5 +25,13 @@ export async function  middleware(req,res) {
     }else{
         return NextResponse.redirect((new URL("/auth/login",req.url)))
     }
+  } else if(req.nextUrl.pathname.startsWith("/addProducts")){
+    if (await isAdminAuth()) {
+      return NextResponse.next();
+      
+    }else{
+      return NextResponse.redirect((new URL("/auth/login",req.url)))
+    }
+
   }
 }
